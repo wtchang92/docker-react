@@ -1,0 +1,19 @@
+version: '3'
+services:
+  web:
+    build:
+      context: . # where are your damn dockerfiles
+      dockerfile: Dockerfile.dev #name of the dockerfile if you override
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules
+      - .:/app #map to local path use `:`.  `.` is pwd on local?
+  tests:
+    build:
+      context: . # where are your damn dockerfiles
+      dockerfile: Dockerfile.dev #name of the dockerfile if you override
+    volumes:
+      - /app/node_modules
+      - .:/app #map to local path use `:`.  `.` is pwd on local?
+    command: ["npm", "run", "test"]
